@@ -1,8 +1,20 @@
 *.iml
 .gradle
+*.ipr
+*.iws
 /local.properties
 /.idea/*
 .DS_Store
 /build
 /captures
 .externalNativeBuild
+
+# IDEA/Android Studio Ignore exceptions
+!/.idea/vcs.xml
+!/.idea/fileTemplates/
+!/.idea/inspectionProfiles/
+!/.idea/scopes/
+!/.idea/codeStyleSettings.xml
+!/.idea/encodings.xml
+!/.idea/copyright/
+!/.idea/compiler.xml
