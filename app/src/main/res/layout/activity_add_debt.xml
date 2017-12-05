@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="cs421.cs.mhu.edu.iou.AddDebtActivity">
+
+    <TextView
+        android:id="@+id/addDebtTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Add New Debt"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/selectContactBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:onClick="onClickSelectContact"
+        android:text="Select Contact"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/addDebtTitle" />
+
+    <TextView
+        android:id="@+id/timeLbl"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="36dp"
+        android:text="Time:"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/dateLbl" />
+
+    <TextView
+        android:id="@+id/dateLbl"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="24dp"
+        android:text="Date:"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/titleLbl" />
+
+    <TextView
+        android:id="@+id/titleLbl"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:text="Title:"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/amountLbl" />
+
+    <TextView
+        android:id="@+id/amountLbl"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="64dp"
+        android:text="Amount:"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/numberLbl" />
+
+    <Button
+        android:id="@+id/selectDateBtn"
+        android:layout_width="114dp"
+        android:layout_height="38dp"
+        android:layout_marginEnd="8dp"
+        android:onClick="selectDate"
+        android:text="Select Date"
+        app:layout_constraintBaseline_toBaselineOf="@+id/dateSelectedLbl"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <EditText
+        android:id="@+id/titleEditText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="48dp"
+        android:ems="10"
+        android:hint="Lunch"
+        android:inputType="textPersonName"
+        app:layout_constraintBaseline_toBaselineOf="@+id/titleLbl"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/titleLbl" />
+
+    <EditText
+        android:id="@+id/amountEditText"
+        android:layout_width="215dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="20dp"
+        android:ems="10"
+        android:hint="$15"
+        android:inputType="number"
+        app:layout_constraintBaseline_toBaselineOf="@+id/amountLbl"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/amountLbl" />
+
+    <TextView
+        android:id="@+id/nameLbl"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="76dp"
+        android:layout_marginTop="24dp"
+        android:text="Name:"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/selectContactBtn" />
+
+    <TextView
+        android:id="@+id/numberLbl"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="36dp"
+        android:text="Number:"
+        app:layout_constraintStart_toStartOf="@+id/nameLbl"
+        app:layout_constraintTop_toBottomOf="@+id/nameLbl" />
+
+    <Button
+        android:id="@+id/saveBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:text="Save"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/timeLbl" />
+
+    <EditText
+        android:id="@+id/selectedContactName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:ems="10"
+        android:hint="Enter Name..."
+        android:inputType="textPersonName"
+        app:layout_constraintBaseline_toBaselineOf="@+id/nameLbl"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.648"
+        app:layout_constraintStart_toEndOf="@+id/nameLbl" />
+
+    <EditText
+        android:id="@+id/selectedContactNumber"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:ems="10"
+        android:hint="Enter Number..."
+        android:inputType="number"
+        app:layout_constraintBaseline_toBaselineOf="@+id/numberLbl"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/numberLbl" />
+
+    <TextView
+        android:id="@+id/dateSelectedLbl"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:text="TextView"
+        android:textSize="18sp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/dateLbl"
+        app:layout_constraintEnd_toStartOf="@+id/selectDateBtn"
+        app:layout_constraintStart_toEndOf="@+id/dateLbl" />
+
+    <Button
+        android:id="@+id/selectTimeBtn"
+        android:layout_width="114dp"
+        android:layout_height="37dp"
+        android:layout_marginEnd="8dp"
+        android:onClick="selectTime"
+        android:text="Select Time"
+        app:layout_constraintBaseline_toBaselineOf="@+id/timeSelectedLbl"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/timeSelectedLbl"
+        android:layout_width="100dp"
+        android:layout_height="23dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:text="TextView"
+        android:textSize="18sp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/timeLbl"
+        app:layout_constraintEnd_toStartOf="@+id/selectTimeBtn"
+        app:layout_constraintStart_toEndOf="@+id/timeLbl" />
+</android.support.constraint.ConstraintLayout>
