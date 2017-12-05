@@ -1,4 +1,4 @@
-package cs421.cs.mhu.edu.iou;
+package cs421.cs.mhu.edu.iou.db;
 
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.ForeignKey;
@@ -10,7 +10,6 @@ import static android.arch.persistence.room.ForeignKey.CASCADE;
  * Created by mgilbert on 11/30/17.
  */
 @Entity(
-        tableName = "transactiondebt",
         foreignKeys = {
                 @ForeignKey(
                         entity = Debt.class,

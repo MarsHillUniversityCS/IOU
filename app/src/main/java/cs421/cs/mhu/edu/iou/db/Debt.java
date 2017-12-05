@@ -1,8 +1,11 @@
-package cs421.cs.mhu.edu.iou;
+package cs421.cs.mhu.edu.iou.db;
 
 import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.Ignore;
 import android.arch.persistence.room.PrimaryKey;
 import android.location.Location;
+
+import java.text.DecimalFormat;
 
 /**
  * Created by mgilbert on 11/30/17.
@@ -10,6 +13,9 @@ import android.location.Location;
 
 @Entity
 public class Debt {
+
+    @Ignore
+    static DecimalFormat df2 = new DecimalFormat("#.00");
 
     @PrimaryKey(autoGenerate = true)
     private long id;
@@ -25,8 +31,6 @@ public class Debt {
     private double amount;
 
     private long time;
-
-    private Location location;
 
     private int reminderFrequency;
 
@@ -88,14 +92,6 @@ public class Debt {
         this.time = time;
     }
 
-    public Location getLocation() {
-        return location;
-    }
-
-    public void setLocation(Location location) {
-        this.location = location;
-    }
-
     public int getReminderFrequency() {
         return reminderFrequency;
     }
@@ -110,5 +106,21 @@ public class Debt {
 
     public void setPaidInFull(boolean paidInFull) {
         this.paidInFull = paidInFull;
+    }
+
+    public String getAmountString(){
+        return "$" + df2.format(getAmount());
+    }
+
+    public String toString() {
+        String result = "";
+        if(theyOweMe){
+            result = "Contact id " + getContactID() + " owes me ";
+        } else {
+            result = "I owe contact id " + getContactID() + " ";
+        }
+
+        result += getAmountString() + " for " + getTitle();
+        return result;
     }
 }
