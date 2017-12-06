@@ -6,7 +6,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import java.text.DecimalFormat;
 import java.util.List;
 
 import cs421.cs.mhu.edu.iou.R;
@@ -16,8 +15,6 @@ import cs421.cs.mhu.edu.iou.db.Debt;
  * Created by marty on 12/1/17.
  */
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.RecyclerViewHolder> {
-
-
 
     private List<Debt> debtList;
     private View.OnLongClickListener longClickListener;
@@ -60,9 +57,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     public void addItems(List<Debt> debtList) {
         this.debtList = debtList;
-        //notifyDataSetChanged();
-        //notifyItemInserted(debtList.size() - 1);
-        //notifyI
+        notifyDataSetChanged();
     }
 
     static class RecyclerViewHolder extends RecyclerView.ViewHolder {

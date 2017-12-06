@@ -11,6 +11,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -64,20 +65,14 @@ public class ViewDebtListActivity extends AppCompatActivity implements View.OnLo
 
         debtListViewModel = ViewModelProviders.of(this).get(DebtListViewModel.class);
 
-        /*
         debtListViewModel.getDebtList().observe(ViewDebtListActivity.this,
                 new Observer<List<Debt>>(){
-
             @Override
             public void onChanged(@Nullable List<Debt> debts){
                 recyclerViewAdapter.addItems(debts);
             }
 
         });
-        */
-
-
-
 
         FloatingActionButton addButton = findViewById(R.id.fab);
         addButton.setOnClickListener(new View.OnClickListener() {
