@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
+import cs421.cs.mhu.edu.iou.listdebts.ViewDebtListActivity;
+
 public class IOUMain extends Activity {
 
     @Override
@@ -13,12 +15,9 @@ public class IOUMain extends Activity {
         setContentView(R.layout.activity_ioumain);
     }
 
-    /**
-     * Button that takes you to the ViewEditActivity
-     * @param v
-     */
-    public void addDebtBtn(View v) {
-        Intent i = new Intent(this, AddDebtActivity.class);
+    public void launchList(View v){
+        Intent i = new Intent(this, ViewDebtListActivity.class);
+
         startActivity(i);
     }
 }
