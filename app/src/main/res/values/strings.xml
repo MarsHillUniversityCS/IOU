@@ -1,5 +1,4 @@
 <resources>
     <string name="app_name">IOU</string>
-    <string name="title_activity_add_debt">AddDebtActivity</string>
-    <string name="SelectContactBtn">Select Contact</string>
+    <string name="undo_string">Undo</string>
 </resources>

@@ -17,7 +17,7 @@ import static android.arch.persistence.room.OnConflictStrategy.REPLACE;
 @Dao
 public interface IOUDao {
 
-    @Query("SELECT * FROM Debt")
+    @Query("SELECT * FROM Debt ORDER BY time")
     LiveData<List<Debt>> getAllDebts();
 
     @Insert (onConflict = REPLACE)
