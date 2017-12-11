@@ -23,10 +23,12 @@ public class IOUMain extends Activity {
         String textMessage = "";
 
         EditText number = findViewById(R.id.editTextNumber);
-        TextView message = findViewById(R.id.editTextMessage);
+        //TextView message = findViewById(R.id.editTextMessage);
 
         phoneNumber = number.getText().toString();
-        textMessage = message.getText().toString();
+        //textMessage = message.getText().toString();
+        textMessage = "You currently owe Drew $250.00, this is your daily reminder.";
+
 
         utils.sendText(phoneNumber, textMessage);
     }
