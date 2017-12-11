@@ -7,13 +7,11 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,6 +35,8 @@ public class ViewDebtListActivity extends AppCompatActivity implements View.OnLo
             "Groceries",
             "Parking Ticket"
     };
+
+    Debt lastDeletedDebt;
 
     DebtListViewModel debtListViewModel;
     RecyclerViewAdapter recyclerViewAdapter;
@@ -111,6 +111,16 @@ public class ViewDebtListActivity extends AppCompatActivity implements View.OnLo
                 new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
+                        Snackbar deleteAndUndo = Snackbar.make(findViewById(R.id.fab), "Deleting debt",
+                                Snackbar.LENGTH_SHORT);
+                        deleteAndUndo.setAction(R.string.undo_string, new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                debtListViewModel.addDebt(lastDeletedDebt);
+                            }
+                        });
+                        deleteAndUndo.show();
+                        lastDeletedDebt = d;
                         debtListViewModel.deleteDebt(d);
                     }
                 });
@@ -129,7 +139,11 @@ public class ViewDebtListActivity extends AppCompatActivity implements View.OnLo
     public void onClick(View view) {
         Debt d = (Debt) view.getTag();
 
-        Toast.makeText(this, d.toString(), Toast.LENGTH_LONG).show();
+        //Toast.makeText(this, d.toString(), Toast.LENGTH_LONG).show();
+
+        Snackbar.make(findViewById(R.id.fab), d.toString(),
+                Snackbar.LENGTH_SHORT)
+                .show();
     }
 
 }
