@@ -5,6 +5,7 @@ import android.app.Notification;
 import android.app.PendingIntent;
 import android.app.NotificationManager;
 import android.content.Intent;
+import android.graphics.drawable.Icon;
 import android.util.Log;
 
 import static android.content.Context.NOTIFICATION_SERVICE;
@@ -15,14 +16,15 @@ import static android.content.Context.NOTIFICATION_SERVICE;
 
 public class NotificationMgr {
 
-    public static String notificationKey = "notificationKey";
-    public static String notificationKey2 = "notificationKey2";
+    public static String notificationIDKey = "notificationIDKey";
+    public static String notificationActionKey = "notificationActionKey";
+    public static String app_name = "IOU";
 
     public void sendNotificationWithActions(Activity context, String title, String body, int notificationID){
 
         //create notification
-        Log.d("NotificationTester", "send notification with actions");
-        Log.d("NotificationTester", notificationID + "");
+        Log.d(app_name, "send notification with actions");
+        Log.d(app_name, notificationID + "");
         Notification.Builder builder =
                 new Notification.Builder(context)
                         .setSmallIcon(android.R.drawable.ic_dialog_info)
@@ -30,31 +32,18 @@ public class NotificationMgr {
                         .setContentText(body);
 
         Intent smsIntent = new Intent(context, ActionReceiver.class);
-        smsIntent.putExtra(notificationKey, notificationID);
-        smsIntent.putExtra(notificationKey2, ActionReceiver.Action1);
+        smsIntent.putExtra(notificationIDKey, notificationID);
+        smsIntent.putExtra(notificationActionKey, ActionReceiver.Action1);
         PendingIntent smsPendingIntent = PendingIntent.getBroadcast(context, notificationID , smsIntent, PendingIntent.FLAG_UPDATE_CURRENT);
-        builder.addAction(android.R.drawable.ic_dialog_info, "Send SMS", smsPendingIntent);
+        Notification.Action smsAction = new Notification.Action.Builder(Icon.createWithResource(context, android.R.drawable.ic_dialog_info), context.getString(R.string.strNotificationAction1), smsPendingIntent).build();
+        builder.addAction(smsAction);
 
         Intent remindIntent = new Intent(context, ActionReceiver.class);
-        remindIntent.putExtra(notificationKey, notificationID);
-        remindIntent.putExtra(notificationKey2, ActionReceiver.Action2);
+        remindIntent.putExtra(notificationIDKey, notificationID);
+        remindIntent.putExtra(notificationActionKey, ActionReceiver.Action2);
         PendingIntent remindPendingIntent = PendingIntent.getBroadcast(context, notificationID, remindIntent, PendingIntent.FLAG_UPDATE_CURRENT);
-        builder.addAction(android.R.drawable.ic_dialog_info, "Remind me later", remindPendingIntent);
-
-        /*//add Send SMS option to the notification
-        Intent iAction1 = new Intent(context, NotificationActions.class);
-        iAction1.putExtra(notificationKey, notificationID);
-        iAction1.setAction(NotificationActions.Action1);
-        PendingIntent piAction1 = PendingIntent.getService(context, 0, iAction1, PendingIntent.FLAG_UPDATE_CURRENT);
-        builder.addAction(android.R.drawable.sym_action_chat, "Send SMS", piAction1);
-
-        //add dismiss option to the notification
-        Intent iAction2 = new Intent(context, NotificationActions.class);
-        iAction2.putExtra(notificationKey, notificationID);
-        iAction2.setAction(NotificationActions.Action2);
-        PendingIntent piDismissAction = PendingIntent.getActivity(context, 0, iAction2, 0);
-        //PendingIntent piDismissAction = PendingIntent.getService(context, 0, iAction2, PendingIntent.FLAG_UPDATE_CURRENT);
-        builder.addAction(android.R.drawable.sym_action_c hat, "Remind me later", piDismissAction);*/
+        Notification.Action remindMeAction = new Notification.Action.Builder(Icon.createWithResource(context, android.R.drawable.ic_dialog_info), context.getString(R.string.strNotificationAction2), remindPendingIntent).build();
+        builder.addAction(remindMeAction);
 
         //"activate" this notification
         NotificationManager notifyMgr =
@@ -66,7 +55,7 @@ public class NotificationMgr {
     public void sendNotification(Activity context, String title, String body, int notificationID){
 
         //create
-        Log.d("NotificationTester", "send notification without actions");
+        Log.d(app_name, "send notification without actions");
         Notification.Builder builder =
                 new Notification.Builder(context)
                         .setSmallIcon(android.R.drawable.ic_dialog_info)
@@ -75,7 +64,7 @@ public class NotificationMgr {
 
         //create an intent to go back to MainActivity
         Intent resultIntent = new Intent(context, IOUMain.class);
-        resultIntent.putExtra(notificationKey, notificationID);
+        resultIntent.putExtra(notificationIDKey, notificationID);
         //allow android to launch this app when clicked
         PendingIntent pendingIntent =
                 PendingIntent.getActivity(

@@ -24,7 +24,7 @@ public class NotificationActions extends IntentService {
         final String action = intent.getAction();
         Log.d("NotificationTester", "got to action");
         int notificationID = 0;
-        intent.getIntExtra(NotificationMgr.notificationKey, notificationID);
+        intent.getIntExtra(NotificationMgr.notificationIDKey, notificationID);
         if (Action1.equals(action)) {
             Log.d("NotificationTester", "Send SMS action");
             //NotificationMgr.cancel(notificationID);
