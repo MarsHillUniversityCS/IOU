@@ -29,7 +29,7 @@ public class DebtListViewModel extends AndroidViewModel {
     public DebtListViewModel(Application application) {
         super(application);
 
-        database = IOUDb.getDatabase(this.getApplication());
+        database = IOUDb.getDatabase(application);
 
         debtList = database.iouDao().getAllDebts();
     }
