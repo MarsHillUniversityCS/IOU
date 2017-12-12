@@ -9,7 +9,7 @@ import android.widget.TextView;
 
 public class IOUMain extends Activity {
 
-    public SMSUtils utils;
+    //public SMSUtils utils;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -17,6 +17,7 @@ public class IOUMain extends Activity {
         setContentView(R.layout.activity_ioumain);
     }
 
+    /*
     public void sendText(View v){
         utils = new SMSUtils(this);
         String phoneNumber = "";
@@ -32,4 +33,5 @@ public class IOUMain extends Activity {
 
         utils.sendText(phoneNumber, textMessage);
     }
+   */
 }
