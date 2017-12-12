@@ -22,6 +22,10 @@
         <activity
             android:name=".AddDebtActivity"
             android:label="@string/title_activity_add_debt"></activity>
+
+        <receiver android:name=".ActionReceiver" />
+
+        <activity android:name=".AddPayment" android:parentActivityName=".IOUMain"></activity>
         <activity android:name=".listdebts.ViewDebtListActivity"></activity>
     </application>
 
