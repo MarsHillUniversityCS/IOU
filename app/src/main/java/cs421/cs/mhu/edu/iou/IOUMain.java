@@ -1,6 +1,7 @@
 package cs421.cs.mhu.edu.iou;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -30,5 +31,10 @@ public class IOUMain extends Activity {
         int notificationId = notificationIdGenerator.nextInt();
         Log.d("NotificationTester", notificationId + "");
         manager.sendNotificationWithActions(this, "IOU Debt Reminder", "Marty owes you $20", notificationId);
+    }
+
+    public void goToAddPayment(View v){
+        Intent i = new Intent(this, AddPayment.class);
+        startActivity(i);
     }
 }
