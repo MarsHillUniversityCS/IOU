@@ -3,5 +3,5 @@
     xmlns:tools="http://schemas.android.com/tools" tools:context=".AddPayment">
 
     <item
-        android:id="@+id/confirm" android:icon="@mipmap/ic_done_white_24dp" app:showAsAction="always"   android:title="@string/strConfirm"/>
+        android:id="@+id/confirm" android:icon="@drawable/ic_done_white_24dp" app:showAsAction="always"   android:title="@string/strConfirm"/>
 </menu>
