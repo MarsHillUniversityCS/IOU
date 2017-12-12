@@ -17,25 +17,34 @@ import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
 import java.util.Calendar;
 
+import cs421.cs.mhu.edu.iou.db.Debt;
+import cs421.cs.mhu.edu.iou.db.IOUDb;
+import cs421.cs.mhu.edu.iou.db.tasks.AddDebtTask;
+import cs421.cs.mhu.edu.iou.listdebts.ViewDebtListActivity;
+
 public class AddDebtActivity extends Activity {
 
     private static final String TAG = AddDebtActivity.class.getSimpleName();
     private static final int REQUEST_CODE_PICK_CONTACTS = 1;
-    private static final int MY_PERMISSIONS_REQUEST_READ_CONTACTS = 2;
     private Uri uriContact;
     private String contactID;
+    private static final int MY_PERMISSIONS_REQUEST_READ_CONTACTS = 2;
 
     private Button selectContactBtn;
     private Button selectDateBtn;
     private Button selectTimeBtn;
+    private Switch whoOwesBtn;
 
+    private TextView whoOwesLbl;
     private TextView amountLbl;
     private TextView titleLbl;
     private TextView dateLbl;
@@ -49,8 +58,10 @@ public class AddDebtActivity extends Activity {
     private EditText amount;
     private EditText title;
     private EditText time;
+    private EditText description;
 
     private DatePickerDialog datePickerDialog;
+    private TimePickerDialog timePickerDialog;
     int mDay;
     int mMonth;
     int mYear;
@@ -60,10 +71,16 @@ public class AddDebtActivity extends Activity {
 
     String AMPM;
 
+    Boolean theyOweMe = true;
+
+    public static Context contextOfApplication;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_debt);
+
+        contextOfApplication = getApplicationContext();
 
         requestPermissions();
 
@@ -76,22 +93,27 @@ public class AddDebtActivity extends Activity {
         mMinute = c.get(Calendar.MINUTE);
         mAmPm   = c.get(Calendar.AM_PM);
 
-        amountLbl = (TextView) findViewById(R.id.amountLbl);
-        titleLbl = (TextView) findViewById(R.id.titleLbl);
-        dateLbl = (TextView) findViewById(R.id.dateLbl);
-        timeLbl = (TextView) findViewById(R.id.timeLbl);
-        dateSelectedLbl = (TextView) findViewById(R.id.dateSelectedLbl);
-        timeSelectedLbl = (TextView) findViewById(R.id.timeSelectedLbl);
 
-        selectedContactName = (EditText) findViewById(R.id.selectedContactName);
-        selectedContactNumber = (EditText) findViewById(R.id.selectedContactNumber);
+        whoOwesLbl          = (TextView) findViewById(R.id.whoOwesLbl);
+        amountLbl           = (TextView) findViewById(R.id.amountLbl);
+        titleLbl            = (TextView) findViewById(R.id.titleLbl);
+        dateLbl             = (TextView) findViewById(R.id.dateLbl);
+        timeLbl             = (TextView) findViewById(R.id.timeLbl);
+        dateSelectedLbl     = (TextView) findViewById(R.id.dateSelectedLbl);
+        timeSelectedLbl     = (TextView) findViewById(R.id.timeSelectedLbl);
 
-        amount = (EditText) findViewById(R.id.amountEditText);
-        title = (EditText) findViewById(R.id.titleEditText);
+        selectedContactName     = (EditText) findViewById(R.id.selectedContactName);
+        selectedContactNumber   = (EditText) findViewById(R.id.selectedContactNumber);
+
+        amount        = (EditText) findViewById(R.id.amountEditText);
+        title         = (EditText) findViewById(R.id.titleEditText);
+        description   = (EditText) findViewById(R.id.descriptionEditText);
 
         selectContactBtn = (Button) findViewById(R.id.selectContactBtn);
-        selectDateBtn = (Button) findViewById(R.id.selectDateBtn);
-        selectTimeBtn = (Button) findViewById(R.id.selectTimeBtn);
+        selectDateBtn    = (Button) findViewById(R.id.selectDateBtn);
+        selectTimeBtn    = (Button) findViewById(R.id.selectTimeBtn);
+        whoOwesBtn       = (Switch) findViewById(R.id.whoOwesSwitch);
+
 
         dateSelectedLbl.setText(mDay + "/" + (mMonth + 1) + "/" + mYear);
 
@@ -104,7 +126,124 @@ public class AddDebtActivity extends Activity {
 
         timeSelectedLbl.setText(mHour + ":" + mMinute + " " + AMPM);
 
+       whoOwesBtn.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener(){
+            @Override
+            public void onCheckedChanged(CompoundButton cb, boolean on){
+                if(on) {
+                    //Do something when Switch button is on/checked
+                    whoOwesLbl.setText("I owe");
+                    theyOweMe = false;
+                }
+                else {
+                    //Do something when Switch is off/unchecked
+                    whoOwesLbl.setText("They owe");
+                    theyOweMe = true;
+                }
+            }
+        });
+    }
 
+    public static Context getContextOfApplication()
+    {
+        return contextOfApplication;
+    }
+
+    public void requestPermissions() {
+
+        // Here, thisActivity is the current activity
+        if (this.checkSelfPermission(
+                Manifest.permission.READ_CONTACTS)
+                != PackageManager.PERMISSION_GRANTED) {
+
+            // Should we show an explanation?
+            if (this.shouldShowRequestPermissionRationale(
+                    Manifest.permission.READ_CONTACTS)) {
+
+                // Show an explanation to the user *asynchronously* -- don't block
+                // this thread waiting for the user's response! After the user
+                // sees the explanation, try again to request the permission.
+
+            } else {
+
+                // No explanation needed, we can request the permission.
+                this.requestPermissions(new String[]{Manifest.permission.READ_CONTACTS},
+                        MY_PERMISSIONS_REQUEST_READ_CONTACTS);
+
+                // MY_PERMISSIONS_REQUEST_READ_CONTACTS is an
+                // app-defined int constant. The callback method gets the
+                // result of the request.
+            }
+        }
+    }
+
+    /**
+     * Date picker that gets the date selected by the user and stores the data
+     *
+     * @param v
+     */
+    public void selectDate(View v) {
+
+        datePickerDialog = new DatePickerDialog(AddDebtActivity.this,
+                new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                        dateSelectedLbl.setText(dayOfMonth + "/" + (monthOfYear + 1) + "/" + year);
+                        mDay    = dayOfMonth;
+                        mMonth  = monthOfYear;
+                        mYear   = year;
+                    }
+                }, mYear, mMonth, mDay);
+        datePickerDialog.show();
+    }
+
+    /**
+     * Time picker that gets the time selected by the user and stores the data
+     *
+     * @param v
+     */
+    public void selectTime(View v) {
+
+        // Launch Time Picker Dialog
+        TimePickerDialog timePickerDialog = new TimePickerDialog(this,
+                new TimePickerDialog.OnTimeSetListener() {
+
+                    @Override
+                    public void onTimeSet(TimePicker view, int hourOfDay,
+                                          int minute) {
+
+                        timeSelectedLbl.setText(hourOfDay + ":" + minute);
+                    }
+                }, mHour, mMinute, false);
+        timePickerDialog.show();
+    }
+
+    public void saveBtn(View v){
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(mYear, mMonth, mDay,
+                mHour, mMinute, 0);
+
+        long selectedTime = calendar.getTimeInMillis();
+
+        Debt d = new Debt();
+        String value = amount.getText().toString();
+        d.setAmount(Double.parseDouble(value));
+
+        String desc = description.getText().toString();
+        d.setDescription(desc);
+
+        String debtTitle = title.getText().toString();
+        d.setTitle(debtTitle);
+
+        d.setReminderFrequency(864000);
+        d.setTheyOweMe(theyOweMe);
+        d.setTime(selectedTime);
+        d.setContactID(Integer.parseInt(contactID));
+        IOUDb database = IOUDb.getDatabase(this);
+        //database.iouDao().addDebt(d);
+        new AddDebtTask(database).execute(d);
+
+        finish();
     }
 
     public void onClickSelectContact(View btnSelectContact) {
@@ -195,33 +334,6 @@ public class AddDebtActivity extends Activity {
         selectedContactName.setText(contactName);
     }
 
-    public void requestPermissions() {
-
-        // Here, thisActivity is the current activity
-        if (this.checkSelfPermission(
-                Manifest.permission.READ_CONTACTS)
-                != PackageManager.PERMISSION_GRANTED) {
-
-            // Should we show an explanation?
-            if (this.shouldShowRequestPermissionRationale(
-                    Manifest.permission.READ_CONTACTS)) {
-
-                // Show an explanation to the user *asynchronously* -- don't block
-                // this thread waiting for the user's response! After the user
-                // sees the explanation, try again to request the permission.
-
-            } else {
-
-                // No explanation needed, we can request the permission.
-                this.requestPermissions(new String[]{Manifest.permission.READ_CONTACTS},
-                        MY_PERMISSIONS_REQUEST_READ_CONTACTS);
-
-                // MY_PERMISSIONS_REQUEST_READ_CONTACTS is an
-                // app-defined int constant. The callback method gets the
-                // result of the request.
-            }
-        }
-    }
 
     @Override
     public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
@@ -285,12 +397,7 @@ public class AddDebtActivity extends Activity {
         startActivity(intent);
     }
 
-
-    public void contactViaId(View v) {
-        getNameUsingContactId(contactID);
-    }
-
-    public void getNameUsingContactId(String contactId){
+    public void getNameUsingContactId(String contactId) {
 
         String cContactIdString = ContactsContract.Contacts._ID;
         Uri cCONTACT_CONTENT_URI = ContactsContract.Contacts.CONTENT_URI;
@@ -323,44 +430,5 @@ public class AddDebtActivity extends Activity {
 
     }
 
-
-
-
-    /**
-     * Date picker that gets the date selected by the user and stores the data
-     *
-     * @param v
-     */
-    public void selectDate(View v) {
-
-        datePickerDialog = new DatePickerDialog(AddDebtActivity.this,
-                new DatePickerDialog.OnDateSetListener() {
-                    @Override
-                    public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-                        dateSelectedLbl.setText(dayOfMonth + "/" + (monthOfYear + 1) + "/" + year);
-                        mDay = dayOfMonth;
-                        mMonth = monthOfYear;
-                        mYear = year;
-                    }
-                }, mYear, mMonth, mDay);
-        datePickerDialog.show();
-    }
-
-
-    public void selectTime(View v) {
-
-        // Launch Time Picker Dialog
-        TimePickerDialog timePickerDialog = new TimePickerDialog(this,
-                new TimePickerDialog.OnTimeSetListener() {
-
-                    @Override
-                    public void onTimeSet(TimePicker view, int hourOfDay,
-                                          int minute) {
-
-                        timeSelectedLbl.setText(hourOfDay + ":" + minute);
-                    }
-                }, mHour, mMinute, false);
-        timePickerDialog.show();
-    }
 }
 

@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
@@ -16,6 +17,7 @@ import android.view.View;
 import java.util.ArrayList;
 import java.util.List;
 
+import cs421.cs.mhu.edu.iou.AddDebtActivity;
 import cs421.cs.mhu.edu.iou.R;
 import cs421.cs.mhu.edu.iou.db.Debt;
 
@@ -52,6 +54,7 @@ public class ViewDebtListActivity extends AppCompatActivity implements View.OnLo
         recyclerViewAdapter = new RecyclerViewAdapter(new ArrayList<Debt>(),
                 this,
                 this);
+        recyclerViewAdapter.setContext(this);
         mLayoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(mLayoutManager);
 
@@ -79,6 +82,11 @@ public class ViewDebtListActivity extends AppCompatActivity implements View.OnLo
             @Override
             public void onClick(View view) {
                 //BRANDON - this would launch your 'AddDebtActivity', or whatever.
+
+                Intent i = new Intent(ViewDebtListActivity.this, AddDebtActivity.class);
+
+                startActivity(i);
+                /*
                 Debt d = new Debt();
                 double amount = Math.random() * 100;
                 d.setAmount(amount);
@@ -93,6 +101,7 @@ public class ViewDebtListActivity extends AppCompatActivity implements View.OnLo
                 d.setTime(System.currentTimeMillis());
                 d.setContactID(1);
                 debtListViewModel.addDebt(d);
+                */
             }
         });
 
