@@ -18,9 +18,10 @@ public class NotificationMgr {
 
     public static String notificationIDKey = "notificationIDKey";
     public static String notificationActionKey = "notificationActionKey";
+    public static String notificationContactID = "notificationContactID";
     public static String app_name = "IOU";
 
-    public void sendNotificationWithActions(Activity context, String title, String body, int notificationID){
+    public void sendNotificationWithActions(Activity context, String title, String body, int notificationID, int contactID){
 
         //create notification
         Log.d(app_name, "send notification with actions");
@@ -34,6 +35,7 @@ public class NotificationMgr {
         Intent smsIntent = new Intent(context, ActionReceiver.class);
         smsIntent.putExtra(notificationIDKey, notificationID);
         smsIntent.putExtra(notificationActionKey, ActionReceiver.Action1);
+        smsIntent.putExtra(notificationContactID, contactID);
         PendingIntent smsPendingIntent = PendingIntent.getBroadcast(context, notificationID , smsIntent, PendingIntent.FLAG_UPDATE_CURRENT);
         Notification.Action smsAction = new Notification.Action.Builder(Icon.createWithResource(context, android.R.drawable.ic_dialog_info), context.getString(R.string.strNotificationAction1), smsPendingIntent).build();
         builder.addAction(smsAction);
@@ -41,6 +43,7 @@ public class NotificationMgr {
         Intent remindIntent = new Intent(context, ActionReceiver.class);
         remindIntent.putExtra(notificationIDKey, notificationID);
         remindIntent.putExtra(notificationActionKey, ActionReceiver.Action2);
+        remindIntent.putExtra(notificationContactID, contactID);
         PendingIntent remindPendingIntent = PendingIntent.getBroadcast(context, notificationID, remindIntent, PendingIntent.FLAG_UPDATE_CURRENT);
         Notification.Action remindMeAction = new Notification.Action.Builder(Icon.createWithResource(context, android.R.drawable.ic_dialog_info), context.getString(R.string.strNotificationAction2), remindPendingIntent).build();
         builder.addAction(remindMeAction);
