@@ -4,4 +4,5 @@
     <string name="strNotification2">Send Notification with actions</string>
     <string name="strNotificationAction1">Send SMS</string>
     <string name="strNotificationAction2">Remind Me Later</string>
+    <string name="undo_string">Undo</string>
 </resources>
