@@ -1,5 +1,6 @@
 package cs421.cs.mhu.edu.iou.listdebts;
 
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,6 +9,8 @@ import android.widget.TextView;
 
 import java.util.List;
 
+import cs421.cs.mhu.edu.iou.AddDebtActivity;
+import cs421.cs.mhu.edu.iou.ContactManager;
 import cs421.cs.mhu.edu.iou.R;
 import cs421.cs.mhu.edu.iou.db.Debt;
 
@@ -19,6 +22,11 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     private List<Debt> debtList;
     private View.OnLongClickListener longClickListener;
     private View.OnClickListener clickListener;
+    private Context mContext;
+
+    public void setContext(Context c){
+        mContext = c;
+    }
 
     public RecyclerViewAdapter(List<Debt> debtList,
                                View.OnLongClickListener longClickListener,
@@ -42,7 +50,9 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         //holder.nameTextView.setText(debt.getPersonName());
 
         //placeholder until Brandon works his magic
-        holder.nameTextView.setText("Joe Schmo");
+        holder.nameTextView.setText(ContactManager.getNameUsingContactId(
+                mContext, debt.getContactID()+""));
+
 
         holder.amountTextView.setText(debt.getAmountString());
         holder.itemView.setTag(debt);
@@ -67,9 +77,13 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
         RecyclerViewHolder(View view) {
             super(view);
-            titleTextView =     view.findViewById(R.id.titleTextView);
-            nameTextView =      view.findViewById(R.id.nameTextView);
-            amountTextView =    view.findViewById(R.id.amountTextView);
+            titleTextView   =     view.findViewById(R.id.titleTextView);
+            nameTextView    =      view.findViewById(R.id.nameTextView);
+            amountTextView  =    view.findViewById(R.id.amountTextView);
         }
     }
+
+    /*public String getPersonName(long contactId){
+        //AddDebtActivity.
+    }*/
 }

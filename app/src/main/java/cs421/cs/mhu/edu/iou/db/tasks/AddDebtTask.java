@@ -21,4 +21,6 @@ public class AddDebtTask extends AsyncTask<Debt, Void, Void> {
         ioudb.iouDao().addDebt(debts[0]);
         return null;
     }
+
+
 }
