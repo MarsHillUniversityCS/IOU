@@ -1,15 +1,13 @@
 package cs421.cs.mhu.edu.iou;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.EditText;
-import android.widget.TextView;
 
+import cs421.cs.mhu.edu.iou.listdebts.ViewDebtListActivity;
 
 public class IOUMain extends Activity {
-
-    //public SMSUtils utils;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -17,21 +15,9 @@ public class IOUMain extends Activity {
         setContentView(R.layout.activity_ioumain);
     }
 
-    /*
-    public void sendText(View v){
-        utils = new SMSUtils(this);
-        String phoneNumber = "";
-        String textMessage = "";
+    public void launchList(View v){
+        Intent i = new Intent(this, ViewDebtListActivity.class);
 
-        EditText number = findViewById(R.id.editTextNumber);
-        //TextView message = findViewById(R.id.editTextMessage);
-
-        phoneNumber = number.getText().toString();
-        //textMessage = message.getText().toString();
-        textMessage = "You currently owe Drew $250.00, this is your daily reminder.";
-
-
-        utils.sendText(phoneNumber, textMessage);
+        startActivity(i);
     }
-   */
 }

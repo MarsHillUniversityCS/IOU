@@ -1,6 +1,4 @@
 <resources>
     <string name="app_name">IOU</string>
-    <string name="buttonText">Send Text</string>
-    <string name="textPhoneNumber">Phone Number</string>
-    <string name="textMessage">Message To Send</string>
+    <string name="undo_string">Undo</string>
 </resources>
