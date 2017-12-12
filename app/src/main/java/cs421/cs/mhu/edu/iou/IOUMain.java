@@ -20,9 +20,4 @@ public class IOUMain extends Activity {
 
         startActivity(i);
     }
-
-    public void goToAddPayment(View v){
-        Intent i = new Intent(this, AddPayment.class);
-        startActivity(i);
-    }
 }
