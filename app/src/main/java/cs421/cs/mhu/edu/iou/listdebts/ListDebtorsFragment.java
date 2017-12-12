@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
@@ -19,6 +20,7 @@ import android.view.ViewGroup;
 import java.util.ArrayList;
 import java.util.List;
 
+import cs421.cs.mhu.edu.iou.AddDebtActivity;
 import cs421.cs.mhu.edu.iou.R;
 import cs421.cs.mhu.edu.iou.db.Debt;
 
@@ -49,23 +51,26 @@ public class ListDebtorsFragment extends Fragment implements
     LinearLayoutManager mLayoutManager;
     FloatingActionButton addButton;
 
+    View mView;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View v = inflater.inflate(R.layout.fragment_view_debtors, container, false);
+        mView = inflater.inflate(R.layout.fragment_view_debtors, container, false);
 
 
-        recyclerView = v.findViewById(R.id.recyclerView);
+        recyclerView = mView.findViewById(R.id.recyclerView);
         recyclerViewAdapter = new RecyclerViewAdapter(new ArrayList<Debt>(),
                 this,
                 this);
-        mLayoutManager = new LinearLayoutManager(v.getContext());
+        mLayoutManager = new LinearLayoutManager(mView.getContext());
         recyclerView.setLayoutManager(mLayoutManager);
 
         recyclerView.setAdapter(recyclerViewAdapter);
+        recyclerViewAdapter.setContext(mView.getContext());
 
-        addButton = v.findViewById(R.id.fab);
+        addButton = mView.findViewById(R.id.fab);
 
         debtListViewModel = ViewModelProviders.of(this).get(DebtListViewModel.class);
 
@@ -82,6 +87,10 @@ public class ListDebtorsFragment extends Fragment implements
             @Override
             public void onClick(View view) {
                 //BRANDON - this would launch your 'AddDebtActivity', or whatever.
+                Intent i = new Intent(mView.getContext(), AddDebtActivity.class);
+                startActivity(i);
+
+                /*
                 Debt d = new Debt();
                 double amount = Math.random() * 100;
                 d.setAmount(amount);
@@ -96,11 +105,12 @@ public class ListDebtorsFragment extends Fragment implements
                 d.setTime(System.currentTimeMillis());
                 d.setContactID(1);
                 debtListViewModel.addDebt(d);
+                */
             }
         });
 
 
-        return v;
+        return mView;
     }
 
     @Override
