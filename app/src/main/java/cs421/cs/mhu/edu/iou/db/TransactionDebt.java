@@ -2,6 +2,7 @@ package cs421.cs.mhu.edu.iou.db;
 
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.ForeignKey;
+import android.arch.persistence.room.Index;
 import android.arch.persistence.room.PrimaryKey;
 
 import static android.arch.persistence.room.ForeignKey.CASCADE;
@@ -21,6 +22,11 @@ import static android.arch.persistence.room.ForeignKey.CASCADE;
                         parentColumns = "id",
                         childColumns = "transactionID",
                         onDelete = CASCADE)
+        },
+        indices = {
+                @Index("id"),
+                @Index("debtID"),
+                @Index("transactionID")
         }
 )
 

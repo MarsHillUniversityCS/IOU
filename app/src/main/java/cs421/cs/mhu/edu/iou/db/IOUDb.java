@@ -9,7 +9,7 @@ import android.content.Context;
  * Created by marty on 12/1/17.
  */
 
-@Database(entities={Debt.class, Transaction.class, TransactionDebt.class}, version = 1)
+@Database(entities={Debt.class, Transaction.class, TransactionDebt.class}, version = 1, exportSchema = false)
 public abstract class IOUDb extends RoomDatabase {
     private static IOUDb INSTANCE;
 

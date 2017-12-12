@@ -3,7 +3,6 @@
     package="cs421.cs.mhu.edu.iou">
 
     <uses-permission android:name="android.permission.READ_CONTACTS" />
-    <uses-permission android:name="android.permission.WRITE_CONTACTS" />
 
     <application
         android:allowBackup="true"

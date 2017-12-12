@@ -6,6 +6,7 @@ import android.util.Log;
 
 /**
  * Created by s000192153 on 11/16/17.
+ * @deprecated - isn't this class Deprecated, Josh?
  */
 
 public class NotificationActions extends IntentService {
