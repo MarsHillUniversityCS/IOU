@@ -9,12 +9,12 @@ import android.widget.TextView;
 
 import java.util.List;
 
-import cs421.cs.mhu.edu.iou.AddDebtActivity;
-import cs421.cs.mhu.edu.iou.ContactManager;
+import cs421.cs.mhu.edu.iou.util.ContactManager;
 import cs421.cs.mhu.edu.iou.R;
 import cs421.cs.mhu.edu.iou.db.Debt;
 
 /**
+ * This class handles the list view of all of the debts
  * Created by marty on 12/1/17.
  */
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.RecyclerViewHolder> {
@@ -28,7 +28,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         mContext = c;
     }
 
-    public RecyclerViewAdapter(List<Debt> debtList,
+    RecyclerViewAdapter(List<Debt> debtList,
                                View.OnLongClickListener longClickListener,
                                View.OnClickListener clickListener) {
         this.debtList = debtList;
@@ -65,7 +65,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         return debtList.size();
     }
 
-    public void addItems(List<Debt> debtList) {
+    void addItems(List<Debt> debtList) {
         this.debtList = debtList;
         notifyDataSetChanged();
     }

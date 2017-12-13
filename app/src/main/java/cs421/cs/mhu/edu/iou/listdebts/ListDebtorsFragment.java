@@ -1,6 +1,5 @@
 package cs421.cs.mhu.edu.iou.listdebts;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
@@ -20,11 +19,12 @@ import android.view.ViewGroup;
 import java.util.ArrayList;
 import java.util.List;
 
-import cs421.cs.mhu.edu.iou.AddDebtActivity;
+import cs421.cs.mhu.edu.iou.adddebt.AddDebtActivity;
 import cs421.cs.mhu.edu.iou.R;
 import cs421.cs.mhu.edu.iou.db.Debt;
 
 /**
+ * Fragment to list all of the debts owed to the user
  * Created by mgilbert on 12/12/17.
  */
 

@@ -1,9 +1,7 @@
-package cs421.cs.mhu.edu.iou;
+package cs421.cs.mhu.edu.iou.adddebt;
 
 import android.Manifest;
 import android.app.DatePickerDialog;
-import android.app.Dialog;
-import android.app.DialogFragment;
 import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -13,7 +11,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.app.Activity;
 import android.provider.ContactsContract;
-import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -26,10 +23,10 @@ import android.widget.TimePicker;
 
 import java.util.Calendar;
 
+import cs421.cs.mhu.edu.iou.R;
 import cs421.cs.mhu.edu.iou.db.Debt;
 import cs421.cs.mhu.edu.iou.db.IOUDb;
 import cs421.cs.mhu.edu.iou.db.tasks.AddDebtTask;
-import cs421.cs.mhu.edu.iou.listdebts.ViewDebtListActivity;
 
 public class AddDebtActivity extends Activity {
 
@@ -39,29 +36,29 @@ public class AddDebtActivity extends Activity {
     private String contactID;
     private static final int MY_PERMISSIONS_REQUEST_READ_CONTACTS = 2;
 
-    private Button selectContactBtn;
-    private Button selectDateBtn;
-    private Button selectTimeBtn;
-    private Switch whoOwesBtn;
+    Button selectContactBtn;
+    Button selectDateBtn;
+    Button selectTimeBtn;
+    Switch whoOwesBtn;
 
-    private TextView whoOwesLbl;
-    private TextView amountLbl;
-    private TextView titleLbl;
-    private TextView dateLbl;
-    private TextView timeLbl;
-    private TextView dateSelectedLbl;
-    private TextView timeSelectedLbl;
+    TextView whoOwesLbl;
+    TextView amountLbl;
+    TextView titleLbl;
+    TextView dateLbl;
+    TextView timeLbl;
+    TextView dateSelectedLbl;
+    TextView timeSelectedLbl;
 
-    private EditText selectedContactName;
-    private EditText selectedContactNumber;
+    EditText selectedContactName;
+    EditText selectedContactNumber;
 
-    private EditText amount;
-    private EditText title;
-    private EditText time;
-    private EditText description;
+    EditText amount;
+    EditText title;
+    EditText time;
+    EditText description;
 
-    private DatePickerDialog datePickerDialog;
-    private TimePickerDialog timePickerDialog;
+    DatePickerDialog datePickerDialog;
+    TimePickerDialog timePickerDialog;
     int mDay;
     int mMonth;
     int mYear;
@@ -82,7 +79,8 @@ public class AddDebtActivity extends Activity {
 
         contextOfApplication = getApplicationContext();
 
-        requestPermissions();
+        //MJG - This is done when the app starts; no need to do it here.
+        //requestPermissions();
 
         final Calendar c = Calendar.getInstance();
 
@@ -94,25 +92,25 @@ public class AddDebtActivity extends Activity {
         mAmPm   = c.get(Calendar.AM_PM);
 
 
-        whoOwesLbl          = (TextView) findViewById(R.id.whoOwesLbl);
-        amountLbl           = (TextView) findViewById(R.id.amountLbl);
-        titleLbl            = (TextView) findViewById(R.id.titleLbl);
-        dateLbl             = (TextView) findViewById(R.id.dateLbl);
-        timeLbl             = (TextView) findViewById(R.id.timeLbl);
-        dateSelectedLbl     = (TextView) findViewById(R.id.dateSelectedLbl);
-        timeSelectedLbl     = (TextView) findViewById(R.id.timeSelectedLbl);
+        whoOwesLbl          = findViewById(R.id.whoOwesLbl);
+        amountLbl           = findViewById(R.id.amountLbl);
+        titleLbl            = findViewById(R.id.titleLbl);
+        dateLbl             = findViewById(R.id.dateLbl);
+        timeLbl             = findViewById(R.id.timeLbl);
+        dateSelectedLbl     = findViewById(R.id.dateSelectedLbl);
+        timeSelectedLbl     = findViewById(R.id.timeSelectedLbl);
 
-        selectedContactName     = (EditText) findViewById(R.id.selectedContactName);
-        selectedContactNumber   = (EditText) findViewById(R.id.selectedContactNumber);
+        selectedContactName     =  findViewById(R.id.selectedContactName);
+        selectedContactNumber   =  findViewById(R.id.selectedContactNumber);
 
-        amount        = (EditText) findViewById(R.id.amountEditText);
-        title         = (EditText) findViewById(R.id.titleEditText);
-        description   = (EditText) findViewById(R.id.descriptionEditText);
+        amount        = findViewById(R.id.amountEditText);
+        title         = findViewById(R.id.titleEditText);
+        description   = findViewById(R.id.descriptionEditText);
 
-        selectContactBtn = (Button) findViewById(R.id.selectContactBtn);
-        selectDateBtn    = (Button) findViewById(R.id.selectDateBtn);
-        selectTimeBtn    = (Button) findViewById(R.id.selectTimeBtn);
-        whoOwesBtn       = (Switch) findViewById(R.id.whoOwesSwitch);
+        selectContactBtn = findViewById(R.id.selectContactBtn);
+        selectDateBtn    = findViewById(R.id.selectDateBtn);
+        selectTimeBtn    = findViewById(R.id.selectTimeBtn);
+        whoOwesBtn       = findViewById(R.id.whoOwesSwitch);
 
 
         dateSelectedLbl.setText(mDay + "/" + (mMonth + 1) + "/" + mYear);
@@ -131,18 +129,19 @@ public class AddDebtActivity extends Activity {
             public void onCheckedChanged(CompoundButton cb, boolean on){
                 if(on) {
                     //Do something when Switch button is on/checked
-                    whoOwesLbl.setText("I owe");
+                    whoOwesLbl.setText(R.string.i_owe);
                     theyOweMe = false;
                 }
                 else {
                     //Do something when Switch is off/unchecked
-                    whoOwesLbl.setText("They owe");
+                    whoOwesLbl.setText(R.string.they_owe);
                     theyOweMe = true;
                 }
             }
         });
     }
 
+    /*
     public static Context getContextOfApplication()
     {
         return contextOfApplication;
@@ -175,11 +174,12 @@ public class AddDebtActivity extends Activity {
             }
         }
     }
+    */
 
     /**
      * Date picker that gets the date selected by the user and stores the data
      *
-     * @param v
+     * @param v - the view
      */
     public void selectDate(View v) {
 
@@ -199,7 +199,7 @@ public class AddDebtActivity extends Activity {
     /**
      * Time picker that gets the time selected by the user and stores the data
      *
-     * @param v
+     * @param v - The View
      */
     public void selectTime(View v) {
 
@@ -281,6 +281,7 @@ public class AddDebtActivity extends Activity {
                 new String[]{ContactsContract.Contacts._ID},
                 null, null, null);
 
+        if (cursorID == null) return;
         if (cursorID.moveToFirst()) {
 
             contactID = cursorID.getString(cursorID.getColumnIndex(ContactsContract.Contacts._ID));
@@ -301,8 +302,10 @@ public class AddDebtActivity extends Activity {
                 new String[]{contactID},
                 null);
 
+        if (cursorPhone == null) return;
         if (cursorPhone.moveToFirst()) {
-            contactNumber = cursorPhone.getString(cursorPhone.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
+            contactNumber = cursorPhone.getString(cursorPhone.getColumnIndex(
+                    ContactsContract.CommonDataKinds.Phone.NUMBER));
         }
 
         cursorPhone.close();
@@ -335,32 +338,6 @@ public class AddDebtActivity extends Activity {
     }
 
 
-    @Override
-    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
-        switch (requestCode) {
-            case MY_PERMISSIONS_REQUEST_READ_CONTACTS: {
-                // If request is cancelled, the result arrays are empty.
-                if (grantResults.length > 0
-                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-
-                    Log.d("AddNewContact", "Permission Granted");
-                    // permission was granted, yay! Do the
-                    // contacts-related task you need to do.
-
-                } else {
-
-                    Log.d("AddNewContact", "Permission Denied");
-                    // permission denied, boo! Disable the
-                    // functionality that depends on this permission.
-                }
-                return;
-            }
-
-            // other 'case' lines to check for other
-            // permissions this app might request
-        }
-    }
-
     public void addNewContact(View v) {
         // Creates a new Intent to insert a contact
         Intent intent = new Intent(ContactsContract.Intents.Insert.ACTION);
@@ -371,8 +348,8 @@ public class AddDebtActivity extends Activity {
          * and a phone number.
          *
          */
-        selectedContactName = (EditText) findViewById(R.id.selectedContactName);
-        selectedContactNumber = (EditText) findViewById(R.id.selectedContactNumber);
+        selectedContactName = findViewById(R.id.selectedContactName);
+        selectedContactNumber = findViewById(R.id.selectedContactNumber);
 
         /*
          * Inserts new data into the Intent. This data is passed to the
@@ -397,6 +374,9 @@ public class AddDebtActivity extends Activity {
         startActivity(intent);
     }
 
+    //XXX - Isn't this somewhere else? Like ContactManger? *Shouldn't* it be there, if it's not?
+    //-MJG
+    /*
     public void getNameUsingContactId(String contactId) {
 
         String cContactIdString = ContactsContract.Contacts._ID;
@@ -412,7 +392,7 @@ public class AddDebtActivity extends Activity {
         if ((cursor != null) && (cursor.getCount() > 0)) {
             Log.d("AddNewContact", "Cursor count: " + cursor.getCount());
             cursor.moveToFirst();
-            while ((cursor != null) && (cursor.isAfterLast() == false)) {
+            while (!cursor.isAfterLast()) {
                 if (cursor.getColumnIndex(cContactIdString) >= 0) {
                     if (contactId.equals(cursor.getString(cursor.getColumnIndex(cContactIdString)))) {
                         name = cursor.getString(cursor.getColumnIndex(cDisplayNameColumn));
@@ -429,6 +409,7 @@ public class AddDebtActivity extends Activity {
         //lblNameID.setText(name);
 
     }
+    */
 
 }
 

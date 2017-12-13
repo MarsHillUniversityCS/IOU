@@ -1,9 +1,11 @@
-package cs421.cs.mhu.edu.iou;
+package cs421.cs.mhu.edu.iou.addpayment;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+
+import cs421.cs.mhu.edu.iou.R;
 
 public class AddPayment extends AppCompatActivity {
 

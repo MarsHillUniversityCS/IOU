@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="cs421.cs.mhu.edu.iou.AddPayment"
+    tools:context="cs421.cs.mhu.edu.iou.addpayment.AddPayment"
     tools:layout_editor_absoluteY="81dp">
 
     <ImageView
@@ -76,7 +76,7 @@
         android:layout_marginTop="16dp"
         android:ems="10"
         android:fadingEdge="none"
-        android:gravity="top|left"
+        android:gravity="top|start"
         android:hint="@string/strComment"
         android:inputType="textMultiLine"
         android:minLines="2"

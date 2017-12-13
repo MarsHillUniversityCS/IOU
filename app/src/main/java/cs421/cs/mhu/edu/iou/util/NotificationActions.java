@@ -1,12 +1,14 @@
-package cs421.cs.mhu.edu.iou;
+package cs421.cs.mhu.edu.iou.util;
 
 import android.app.IntentService;
 import android.content.Intent;
 import android.util.Log;
 
+import cs421.cs.mhu.edu.iou.util.NotificationMgr;
+
 /**
  * Created by s000192153 on 11/16/17.
- * @deprecated - isn't this class Deprecated, Josh?
+ * @deprecated - isn't this class Deprecated, Josh? -MJG
  */
 
 public class NotificationActions extends IntentService {

@@ -11,7 +11,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".IOUMain">
+        <activity android:name=".listdebts.ViewDebtListActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -19,13 +19,12 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".AddDebtActivity"
-            android:label="@string/title_activity_add_debt"></activity>
+            android:name=".adddebt.AddDebtActivity"
+            android:label="@string/title_activity_add_debt"/>
 
-        <receiver android:name=".ActionReceiver" />
+        <receiver android:name=".util.ActionReceiver" />
 
-        <activity android:name=".AddPayment" android:parentActivityName=".IOUMain"></activity>
-        <activity android:name=".listdebts.ViewDebtListActivity"></activity>
+        <activity android:name=".addpayment.AddPayment" android:parentActivityName=".listdebts.ViewDebtListActivity"/>
     </application>
 
 </manifest>

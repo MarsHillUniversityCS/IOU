@@ -1,4 +1,4 @@
-package cs421.cs.mhu.edu.iou;
+package cs421.cs.mhu.edu.iou.util;
 
 import android.app.NotificationManager;
 import android.content.BroadcastReceiver;
@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.util.Log;
 
 /**
+ * Receives actions from notifications, and handles them appropriately.
  * Created by s000192153 on 12/11/17.
  */
 
@@ -29,7 +30,8 @@ public class ActionReceiver extends BroadcastReceiver {
             throw new IllegalArgumentException("Unsupported action: " + action);
         }
         NotificationManager mgr = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
-        mgr.cancel(notificationId);
+        if(mgr != null)
+            mgr.cancel(notificationId);
 
         Intent intent1 = new Intent(Intent.ACTION_CLOSE_SYSTEM_DIALOGS);
         context.sendBroadcast(intent1);

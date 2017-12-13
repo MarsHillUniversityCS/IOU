@@ -1,4 +1,4 @@
-package cs421.cs.mhu.edu.iou;
+package cs421.cs.mhu.edu.iou.util;
 
 import android.app.Activity;
 import android.app.Notification;
@@ -8,17 +8,22 @@ import android.content.Intent;
 import android.graphics.drawable.Icon;
 import android.util.Log;
 
+import cs421.cs.mhu.edu.iou.IOUMain;
+import cs421.cs.mhu.edu.iou.R;
+import cs421.cs.mhu.edu.iou.util.ActionReceiver;
+
 import static android.content.Context.NOTIFICATION_SERVICE;
 
 /**
+ * This will manage the notifications needed by IOU
  * Created by s000192153 on 11/28/17.
  */
 
 public class NotificationMgr {
 
-    public static String notificationIDKey = "notificationIDKey";
-    public static String notificationActionKey = "notificationActionKey";
-    public static String app_name = "IOU";
+    static String notificationIDKey = "notificationIDKey";
+    static String notificationActionKey = "notificationActionKey";
+    static String app_name = "IOU";
 
     public void sendNotificationWithActions(Activity context, String title, String body, int notificationID){
 
@@ -49,7 +54,8 @@ public class NotificationMgr {
         NotificationManager notifyMgr =
                 (NotificationManager)
                         context.getSystemService(NOTIFICATION_SERVICE);
-        notifyMgr.notify(notificationID, builder.build());
+        if (notifyMgr != null)
+            notifyMgr.notify(notificationID, builder.build());
     }
 
     public void sendNotification(Activity context, String title, String body, int notificationID){
@@ -80,6 +86,7 @@ public class NotificationMgr {
         NotificationManager notifyMgr =
                 (NotificationManager)
                         context.getSystemService(NOTIFICATION_SERVICE);
-        notifyMgr.notify(notificationID, builder.build());
+        if (notifyMgr != null)
+            notifyMgr.notify(notificationID, builder.build());
     }
 }

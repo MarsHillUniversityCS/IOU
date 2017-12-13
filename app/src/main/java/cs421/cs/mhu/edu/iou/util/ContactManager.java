@@ -1,20 +1,14 @@
-package cs421.cs.mhu.edu.iou;
+package cs421.cs.mhu.edu.iou.util;
 
-import android.Manifest;
 import android.content.Context;
-import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.net.Uri;
 import android.provider.ContactsContract;
 import android.util.Log;
-import android.view.View;
-import android.widget.EditText;
-
-import cs421.cs.mhu.edu.iou.AddDebtActivity;
-import cs421.cs.mhu.edu.iou.R;
 
 /**
+ * Utility class to help manage our interaction with
+ * the phone's contacts.
  * Created by brandonwatkins on 11/12/17.
  */
 
@@ -37,7 +31,7 @@ public class ContactManager {
         if ((cursor != null) && (cursor.getCount() > 0)) {
             Log.d("AddNewContact", "Cursor count: " + cursor.getCount());
             cursor.moveToFirst();
-            while ((cursor != null) && (cursor.isAfterLast() == false)) {
+            while (!cursor.isAfterLast()) {
                 if (cursor.getColumnIndex(cContactIdString) >= 0) {
                     if (contactId.equals(cursor.getString(cursor.getColumnIndex(cContactIdString)))) {
                         name = cursor.getString(cursor.getColumnIndex(cDisplayNameColumn));
