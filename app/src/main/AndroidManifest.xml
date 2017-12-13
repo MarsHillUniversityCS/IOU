@@ -19,6 +19,7 @@
             </intent-filter>
         </activity>
         <activity
+            android:parentActivityName=".listdebts.ViewDebtListActivity"
             android:name=".adddebt.AddDebtActivity"
             android:label="@string/title_activity_add_debt"/>
 

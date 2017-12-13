@@ -34,7 +34,7 @@ public class AddDebtActivity extends Activity {
     private static final int REQUEST_CODE_PICK_CONTACTS = 1;
     private Uri uriContact;
     private String contactID;
-    private static final int MY_PERMISSIONS_REQUEST_READ_CONTACTS = 2;
+    //private static final int MY_PERMISSIONS_REQUEST_READ_CONTACTS = 2;
 
     Button selectContactBtn;
     Button selectDateBtn;
@@ -70,14 +70,12 @@ public class AddDebtActivity extends Activity {
 
     Boolean theyOweMe = true;
 
-    public static Context contextOfApplication;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_debt);
 
-        contextOfApplication = getApplicationContext();
 
         //MJG - This is done when the app starts; no need to do it here.
         //requestPermissions();
