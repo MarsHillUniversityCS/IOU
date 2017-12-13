@@ -1,16 +1,13 @@
 package cs421.cs.mhu.edu.iou.adddebt;
 
-import android.Manifest;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
-import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
-import android.app.Activity;
 import android.provider.ContactsContract;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -28,7 +25,7 @@ import cs421.cs.mhu.edu.iou.db.Debt;
 import cs421.cs.mhu.edu.iou.db.IOUDb;
 import cs421.cs.mhu.edu.iou.db.tasks.AddDebtTask;
 
-public class AddDebtActivity extends Activity {
+public class AddDebtActivity extends AppCompatActivity {
 
     private static final String TAG = AddDebtActivity.class.getSimpleName();
     private static final int REQUEST_CODE_PICK_CONTACTS = 1;
@@ -236,7 +233,7 @@ public class AddDebtActivity extends Activity {
         d.setReminderFrequency(864000);
         d.setTheyOweMe(theyOweMe);
         d.setTime(selectedTime);
-        d.setContactID(Integer.parseInt(contactID));
+        d.setContactID(contactID);
         IOUDb database = IOUDb.getDatabase(this);
         //database.iouDao().addDebt(d);
         new AddDebtTask(database).execute(d);

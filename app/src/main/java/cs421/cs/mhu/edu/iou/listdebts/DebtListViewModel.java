@@ -12,6 +12,7 @@ import cs421.cs.mhu.edu.iou.db.tasks.AddDebtTask;
 import cs421.cs.mhu.edu.iou.db.tasks.DeleteDebtTask;
 
 /**
+ * ViewModel for the DebtList
  * Created by marty on 12/1/17.
  */
 
@@ -34,15 +35,15 @@ public class DebtListViewModel extends AndroidViewModel {
         debtList = database.iouDao().getAllDebts();
     }
 
-    public LiveData<List<Debt>> getDebtList() {
+    LiveData<List<Debt>> getDebtList() {
         return debtList;
     }
 
-    public void deleteDebt(Debt d) {
+    void deleteDebt(Debt d) {
         new DeleteDebtTask(database).execute(d);
     }
 
-    public void addDebt(Debt d) {
+    void addDebt(Debt d) {
         new AddDebtTask(database).execute(d);
     }
 }

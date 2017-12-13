@@ -20,7 +20,7 @@ public class Debt {
     @PrimaryKey(autoGenerate = true)
     private long id;
 
-    private long contactID;
+    private String contactID;
 
     private boolean theyOweMe;
 
@@ -44,11 +44,11 @@ public class Debt {
         this.id = id;
     }
 
-    public long getContactID() {
+    public String getContactID() {
         return contactID;
     }
 
-    public void setContactID(long contactID) {
+    public void setContactID(String contactID) {
         this.contactID = contactID;
     }
 

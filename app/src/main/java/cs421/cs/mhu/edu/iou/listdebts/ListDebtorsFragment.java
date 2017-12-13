@@ -1,5 +1,6 @@
 package cs421.cs.mhu.edu.iou.listdebts;
 
+import android.animation.Animator;
 import android.app.AlertDialog;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
@@ -7,6 +8,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
@@ -14,13 +16,17 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewAnimationUtils;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import cs421.cs.mhu.edu.iou.adddebt.AddDebtActivity;
 import cs421.cs.mhu.edu.iou.R;
+import cs421.cs.mhu.edu.iou.addpayment.AddPayment;
 import cs421.cs.mhu.edu.iou.db.Debt;
 
 /**
@@ -32,17 +38,6 @@ public class ListDebtorsFragment extends Fragment implements
         View.OnLongClickListener,
         View.OnClickListener {
 
-    private final String[] debtTitles = {
-            "Hamilton Tickets",
-            "McDonalds",
-            "Back massage",
-            "Main St. Burrito",
-            "Stackhouse",
-            "Fuel",
-            "Groceries",
-            "Parking Ticket"
-    };
-
     Debt lastDeletedDebt;
 
     DebtListViewModel debtListViewModel;
@@ -50,14 +45,56 @@ public class ListDebtorsFragment extends Fragment implements
     RecyclerView recyclerView;
     LinearLayoutManager mLayoutManager;
     FloatingActionButton addButton;
+    FloatingActionButton addDebt;
+    FloatingActionButton addPayment;
 
     View mView;
+
+    //boolean flag to know if main FAB is in open or closed state.
+    boolean fabExpanded = false;
+
+    //Linear layout holding the Save submenu
+    LinearLayout layoutFabAddDebt;
+
+    //Linear layout holding the Edit submenu
+    LinearLayout layoutFabAddPayment;
+
+    FrameLayout fabFrame;
+    CoordinatorLayout fragmentLayout;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
         mView = inflater.inflate(R.layout.fragment_view_debtors, container, false);
+
+        layoutFabAddDebt    = mView.findViewById(R.id.layoutFabAddDebt);
+        layoutFabAddPayment = mView.findViewById(R.id.layoutFabAddPayment);
+        //layoutFabPhoto  = mView.findViewById(R.id.layoutFabPhoto);
+
+        fabFrame        = mView.findViewById(R.id.fabFrame);
+        fragmentLayout  = mView.findViewById(R.id.coordLayout);
+
+        addDebt     = mView.findViewById(R.id.fabAddDebt);
+        addPayment  = mView.findViewById(R.id.fabAddPayment);
+
+        //When main Fab (Settings) is clicked, it expands if not expanded already.
+        //Collapses if main FAB was open already.
+        //This gives FAB (Settings) open/close behavior
+        addButton = mView.findViewById(R.id.fab);
+        addButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (fabExpanded == true){
+                    closeSubMenusFab();
+                } else {
+                    openSubMenusFab();
+                }
+            }
+        });
+
+        //Only main FAB is visible in the beginning
+        //closeSubMenusFab();
 
 
         recyclerView = mView.findViewById(R.id.recyclerView);
@@ -70,7 +107,6 @@ public class ListDebtorsFragment extends Fragment implements
         recyclerView.setAdapter(recyclerViewAdapter);
         recyclerViewAdapter.setContext(mView.getContext());
 
-        addButton = mView.findViewById(R.id.fab);
 
         debtListViewModel = ViewModelProviders.of(this).get(DebtListViewModel.class);
 
@@ -83,29 +119,20 @@ public class ListDebtorsFragment extends Fragment implements
 
                 });
 
-        addButton.setOnClickListener(new View.OnClickListener() {
+        addDebt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //BRANDON - this would launch your 'AddDebtActivity', or whatever.
                 Intent i = new Intent(mView.getContext(), AddDebtActivity.class);
                 startActivity(i);
+            }
+        });
 
-                /*
-                Debt d = new Debt();
-                double amount = Math.random() * 100;
-                d.setAmount(amount);
-                d.setDescription("Tickets to a broadway show");
+        addPayment.setOnClickListener(new View.OnClickListener(){
 
-                String title = debtTitles[(int)(Math.random() * debtTitles.length)];
-                d.setTitle(title);
-
-                d.setPaidInFull(false);
-                d.setReminderFrequency(864000);
-                d.setTheyOweMe(true);
-                d.setTime(System.currentTimeMillis());
-                d.setContactID(1);
-                debtListViewModel.addDebt(d);
-                */
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(mView.getContext(), AddPayment.class);
+                startActivity(i);
             }
         });
 
@@ -116,7 +143,12 @@ public class ListDebtorsFragment extends Fragment implements
     @Override
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
+    }
 
+    @Override
+    public void onResume(){
+        super.onResume();
+        closeSubMenusFab();
     }
 
     @Override public boolean onLongClick(View view) { final Debt d = (Debt) view.getTag();
@@ -164,7 +196,66 @@ public class ListDebtorsFragment extends Fragment implements
                 Snackbar.LENGTH_SHORT)
                 .show();
     }
+    //closes FAB submenus
+    void closeSubMenusFab(){
 
+        int x = fabFrame.getRight();
+        int y = fabFrame.getBottom();
 
+        int endRadius = 0;
+        int startRadius = (int) Math.hypot(fragmentLayout.getWidth(), fragmentLayout.getHeight());
+
+        Animator animAll = ViewAnimationUtils.createCircularReveal(fabFrame, x, y, startRadius, endRadius);
+        animAll.setDuration(500);
+
+        animAll.addListener(new Animator.AnimatorListener() {
+            @Override
+            public void onAnimationStart(Animator animator) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animator animator) {
+                layoutFabAddDebt.setVisibility(View.INVISIBLE);
+                layoutFabAddPayment.setVisibility(View.INVISIBLE);
+            }
+
+            @Override
+            public void onAnimationCancel(Animator animator) {
+
+            }
+
+            @Override
+            public void onAnimationRepeat(Animator animator) {
+
+            }
+        });
+
+        animAll.start();
+
+        //set icon to '+'
+        addButton.setImageResource(R.drawable.ic_add_white_24dp);
+        fabExpanded = false;
+    }
+
+    //Opens FAB submenus
+    void openSubMenusFab(){
+        int x = fabFrame.getRight();
+        int y = fabFrame.getBottom();
+
+        int startRadius = 0;
+        int endRadius = (int) Math.hypot(fragmentLayout.getWidth(), fragmentLayout.getHeight());
+
+        Animator animAll = ViewAnimationUtils.createCircularReveal(fabFrame, x, y, startRadius, endRadius);
+        animAll.setDuration(500);
+
+        layoutFabAddDebt.setVisibility(View.VISIBLE);
+        layoutFabAddPayment.setVisibility(View.VISIBLE);
+        animAll.start();
+
+        //Change settings icon to check icon
+        addButton.setImageResource(R.drawable.ic_done_white_24dp);
+        fabExpanded = true;
+    }
 
 }

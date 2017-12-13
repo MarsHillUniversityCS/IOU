@@ -20,6 +20,19 @@ import static android.arch.persistence.room.ForeignKey.CASCADE;
 )
 public class Transaction {
 
+    @PrimaryKey(autoGenerate = true)
+    private long id;
+
+    private String contactID;
+
+    private long debtID;
+
+    private boolean toMe;
+
+    private double amount;
+
+    private String memo;
+
     public long getId() {
         return id;
     }
@@ -28,11 +41,10 @@ public class Transaction {
         this.id = id;
     }
 
-    public long getContactID() {
+    public String getContactID() {
         return contactID;
     }
-
-    public void setContactID(long contactID) {
+    public void setContactID(String contactID) {
         this.contactID = contactID;
     }
 
@@ -68,17 +80,5 @@ public class Transaction {
         this.memo = memo;
     }
 
-    @PrimaryKey(autoGenerate = true)
-    private long id;
-
-    private long contactID;
-
-    private long debtID;
-
-    private boolean toMe;
-
-    private double amount;
-
-    private String memo;
 
 }
