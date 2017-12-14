@@ -6,6 +6,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import cs421.cs.mhu.edu.iou.R;
+import cs421.cs.mhu.edu.iou.listdebts.ListDebtsFragment;
 
 public class AddPayment extends AppCompatActivity {
 
@@ -13,6 +14,16 @@ public class AddPayment extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_payment);
+
+        //MJG - set the value if this activity is called
+        //with WHO_OWES_WHOM set to I_OWE, since the default
+        //is THEY_OWE
+        String whoOwes = this.getIntent().getStringExtra(ListDebtsFragment.WHO_OWES_WHOM);
+        if (whoOwes != null && whoOwes.equals(ListDebtsFragment.I_OWE)){
+            //this should trigger code that
+            //changes the lbl value - MJG
+            //i.e., whoOwesBtn.setChecked(true);
+        }
     }
 
     @Override

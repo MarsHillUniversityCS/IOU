@@ -31,6 +31,10 @@ public abstract class ListDebtsFragment extends Fragment implements
         View.OnLongClickListener,
         View.OnClickListener {
 
+    public final static String WHO_OWES_WHOM =  "cs421.cs.mhu.edu.iou.who.owes.whom";
+    public final static String I_OWE =          "cs421.cs.mhu.edu.iou.i.owe";
+    public final static String THEY_OWE =       "cs421.cs.mhu.edu.iou.they.owe";
+
     Debt lastDeletedDebt;
 
     DebtListViewModel debtListViewModel;

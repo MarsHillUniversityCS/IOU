@@ -24,6 +24,7 @@ import cs421.cs.mhu.edu.iou.R;
 import cs421.cs.mhu.edu.iou.db.Debt;
 import cs421.cs.mhu.edu.iou.db.IOUDb;
 import cs421.cs.mhu.edu.iou.db.tasks.AddDebtTask;
+import cs421.cs.mhu.edu.iou.listdebts.ListDebtsFragment;
 
 public class AddDebtActivity extends AppCompatActivity {
 
@@ -74,44 +75,45 @@ public class AddDebtActivity extends AppCompatActivity {
         setContentView(R.layout.activity_add_debt);
 
 
+
         //MJG - This is done when the app starts; no need to do it here.
         //requestPermissions();
 
         final Calendar c = Calendar.getInstance();
 
-        mDay    = c.get(Calendar.DAY_OF_MONTH);
-        mMonth  = c.get(Calendar.MONTH);
-        mYear   = c.get(Calendar.YEAR);
-        mHour   = c.get(Calendar.HOUR);
+        mDay = c.get(Calendar.DAY_OF_MONTH);
+        mMonth = c.get(Calendar.MONTH);
+        mYear = c.get(Calendar.YEAR);
+        mHour = c.get(Calendar.HOUR);
         mMinute = c.get(Calendar.MINUTE);
-        mAmPm   = c.get(Calendar.AM_PM);
+        mAmPm = c.get(Calendar.AM_PM);
 
 
-        whoOwesLbl          = findViewById(R.id.whoOwesLbl);
-        amountLbl           = findViewById(R.id.amountLbl);
-        titleLbl            = findViewById(R.id.titleLbl);
-        dateLbl             = findViewById(R.id.dateLbl);
-        timeLbl             = findViewById(R.id.timeLbl);
-        dateSelectedLbl     = findViewById(R.id.dateSelectedLbl);
-        timeSelectedLbl     = findViewById(R.id.timeSelectedLbl);
+        whoOwesLbl = findViewById(R.id.whoOwesLbl);
+        amountLbl = findViewById(R.id.amountLbl);
+        titleLbl = findViewById(R.id.titleLbl);
+        dateLbl = findViewById(R.id.dateLbl);
+        timeLbl = findViewById(R.id.timeLbl);
+        dateSelectedLbl = findViewById(R.id.dateSelectedLbl);
+        timeSelectedLbl = findViewById(R.id.timeSelectedLbl);
 
-        selectedContactName     =  findViewById(R.id.selectedContactName);
-        selectedContactNumber   =  findViewById(R.id.selectedContactNumber);
+        selectedContactName = findViewById(R.id.selectedContactName);
+        selectedContactNumber = findViewById(R.id.selectedContactNumber);
 
-        amount        = findViewById(R.id.amountEditText);
-        title         = findViewById(R.id.titleEditText);
-        description   = findViewById(R.id.descriptionEditText);
+        amount = findViewById(R.id.amountEditText);
+        title = findViewById(R.id.titleEditText);
+        description = findViewById(R.id.descriptionEditText);
 
         selectContactBtn = findViewById(R.id.selectContactBtn);
-        selectDateBtn    = findViewById(R.id.selectDateBtn);
-        selectTimeBtn    = findViewById(R.id.selectTimeBtn);
-        whoOwesBtn       = findViewById(R.id.whoOwesSwitch);
+        selectDateBtn = findViewById(R.id.selectDateBtn);
+        selectTimeBtn = findViewById(R.id.selectTimeBtn);
+        whoOwesBtn = findViewById(R.id.whoOwesSwitch);
 
 
         dateSelectedLbl.setText(mDay + "/" + (mMonth + 1) + "/" + mYear);
 
         //Determines AM or PM for display
-        if(mAmPm == 0) {
+        if (mAmPm == 0) {
             AMPM = "AM";
         } else if (mAmPm == 1) {
             AMPM = "PM";
@@ -119,21 +121,31 @@ public class AddDebtActivity extends AppCompatActivity {
 
         timeSelectedLbl.setText(mHour + ":" + mMinute + " " + AMPM);
 
-       whoOwesBtn.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener(){
+
+        whoOwesBtn.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
-            public void onCheckedChanged(CompoundButton cb, boolean on){
-                if(on) {
+            public void onCheckedChanged(CompoundButton cb, boolean on) {
+                if (on) {
                     //Do something when Switch button is on/checked
                     whoOwesLbl.setText(R.string.i_owe);
                     theyOweMe = false;
-                }
-                else {
+                } else {
                     //Do something when Switch is off/unchecked
                     whoOwesLbl.setText(R.string.they_owe);
                     theyOweMe = true;
                 }
             }
         });
+
+        //MJG - set the value if this activity is called
+        //with WHO_OWES_WHOM set to I_OWE, since the default
+        //is THEY_OWE
+        String whoOwes = this.getIntent().getStringExtra(ListDebtsFragment.WHO_OWES_WHOM);
+        if (whoOwes != null && whoOwes.equals(ListDebtsFragment.I_OWE)){
+            //this should trigger Brandon's code that
+            //changes the lbl value - MJG
+            whoOwesBtn.setChecked(true);
+        }
     }
 
     /*
@@ -183,9 +195,9 @@ public class AddDebtActivity extends AppCompatActivity {
                     @Override
                     public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
                         dateSelectedLbl.setText(dayOfMonth + "/" + (monthOfYear + 1) + "/" + year);
-                        mDay    = dayOfMonth;
-                        mMonth  = monthOfYear;
-                        mYear   = year;
+                        mDay = dayOfMonth;
+                        mMonth = monthOfYear;
+                        mYear = year;
                     }
                 }, mYear, mMonth, mDay);
         datePickerDialog.show();
@@ -212,7 +224,7 @@ public class AddDebtActivity extends AppCompatActivity {
         timePickerDialog.show();
     }
 
-    public void saveBtn(View v){
+    public void saveBtn(View v) {
 
         Calendar calendar = Calendar.getInstance();
         calendar.set(mYear, mMonth, mDay,

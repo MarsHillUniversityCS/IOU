@@ -21,10 +21,6 @@ import cs421.cs.mhu.edu.iou.db.Debt;
 
 public class ListMyDebtsFragment extends ListDebtsFragment {
 
-    public ListMyDebtsFragment(){
-        super();
-    }
-
     @Override
     public View onCreateView(LayoutInflater inflater,
                              ViewGroup container,
@@ -46,7 +42,7 @@ public class ListMyDebtsFragment extends ListDebtsFragment {
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(mView.getContext(), AddDebtActivity.class);
-                //add an extra flag
+                i.putExtra(ListDebtsFragment.WHO_OWES_WHOM, ListDebtsFragment.I_OWE);
                 startActivity(i);
             }
         });
@@ -56,7 +52,7 @@ public class ListMyDebtsFragment extends ListDebtsFragment {
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(mView.getContext(), AddPayment.class);
-                //add an extra flag
+                i.putExtra(ListDebtsFragment.WHO_OWES_WHOM, ListDebtsFragment.I_OWE);
                 startActivity(i);
             }
         });
