@@ -2,12 +2,8 @@ package cs421.cs.mhu.edu.iou.listdebts;
 
 import android.animation.Animator;
 import android.app.AlertDialog;
-import android.arch.lifecycle.Observer;
-import android.arch.lifecycle.ViewModelProviders;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -22,11 +18,8 @@ import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 
 import java.util.ArrayList;
-import java.util.List;
 
-import cs421.cs.mhu.edu.iou.adddebt.AddDebtActivity;
 import cs421.cs.mhu.edu.iou.R;
-import cs421.cs.mhu.edu.iou.addpayment.AddPayment;
 import cs421.cs.mhu.edu.iou.db.Debt;
 
 /**
@@ -34,7 +27,7 @@ import cs421.cs.mhu.edu.iou.db.Debt;
  * Created by mgilbert on 12/12/17.
  */
 
-public class ListDebtorsFragment extends Fragment implements
+public abstract class ListDebtsFragment extends Fragment implements
         View.OnLongClickListener,
         View.OnClickListener {
 
@@ -53,10 +46,10 @@ public class ListDebtorsFragment extends Fragment implements
     //boolean flag to know if main FAB is in open or closed state.
     boolean fabExpanded = false;
 
-    //Linear layout holding the Save submenu
+    //Linear layout holding Add Debt
     LinearLayout layoutFabAddDebt;
 
-    //Linear layout holding the Edit submenu
+    //Linear layout holding Add Payment
     LinearLayout layoutFabAddPayment;
 
     FrameLayout fabFrame;
@@ -93,10 +86,6 @@ public class ListDebtorsFragment extends Fragment implements
             }
         });
 
-        //Only main FAB is visible in the beginning
-        //closeSubMenusFab();
-
-
         recyclerView = mView.findViewById(R.id.recyclerView);
         recyclerViewAdapter = new RecyclerViewAdapter(new ArrayList<Debt>(),
                 this,
@@ -106,36 +95,6 @@ public class ListDebtorsFragment extends Fragment implements
 
         recyclerView.setAdapter(recyclerViewAdapter);
         recyclerViewAdapter.setContext(mView.getContext());
-
-
-        debtListViewModel = ViewModelProviders.of(this).get(DebtListViewModel.class);
-
-        debtListViewModel.getDebtList().observe(this,
-                new Observer<List<Debt>>(){
-                    @Override
-                    public void onChanged(@Nullable List<Debt> debts){
-                        recyclerViewAdapter.addItems(debts);
-                    }
-
-                });
-
-        addDebt.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent i = new Intent(mView.getContext(), AddDebtActivity.class);
-                startActivity(i);
-            }
-        });
-
-        addPayment.setOnClickListener(new View.OnClickListener(){
-
-            @Override
-            public void onClick(View view) {
-                Intent i = new Intent(mView.getContext(), AddPayment.class);
-                startActivity(i);
-            }
-        });
-
 
         return mView;
     }
@@ -161,7 +120,7 @@ public class ListDebtorsFragment extends Fragment implements
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         Snackbar deleteAndUndo = Snackbar.make(
-                                ListDebtorsFragment.this.getActivity().findViewById(R.id.fab),
+                                ListDebtsFragment.this.getActivity().findViewById(R.id.fab),
                                 "Deleting debt",
                                 Snackbar.LENGTH_SHORT);
                         deleteAndUndo.setAction(R.string.undo_string, new View.OnClickListener() {
@@ -191,8 +150,8 @@ public class ListDebtorsFragment extends Fragment implements
         Debt d = (Debt) view.getTag();
 
         //Toast.makeText(this, d.toString(), Toast.LENGTH_LONG).show();
-
-        Snackbar.make(this.getActivity().findViewById(R.id.fab), d.toString(),
+        //Snackbar.make(this.getActivity().findViewById(R.id.fab), d.toString(),
+        Snackbar.make(this.mView, d.toString(),
                 Snackbar.LENGTH_SHORT)
                 .show();
     }
