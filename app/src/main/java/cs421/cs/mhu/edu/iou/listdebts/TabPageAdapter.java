@@ -17,9 +17,9 @@ public class TabPageAdapter extends FragmentPagerAdapter {
     @Override
     public Fragment getItem(int position) {
         switch(position){
-            case 0: return new ListDebtorsFragment();
-            case 1: return new ListDebtorsFragment();
-            case 2: return new ListDebtorsFragment();
+            case 0: return new ListTheirDebtsFragment();
+            case 1: return new ListMyDebtsFragment();
+            case 2: return new ListMyDebtsFragment();
             default: return null;
         }
     }

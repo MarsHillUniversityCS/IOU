@@ -1,246 +1,252 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="cs421.cs.mhu.edu.iou.adddebt.AddDebtActivity">
 
+    <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/addDebtTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="@string/add_new_debt"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/selectContactBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="36dp"
-        android:layout_marginTop="12dp"
-        android:onClick="onClickSelectContact"
-        android:text="@string/select_contact"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/addDebtTitle" />
+        <TextView
+            android:id="@+id/addDebtTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/add_new_debt"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/timeLbl"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="20dp"
-        android:text="@string/time"
-        android:textSize="18sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dateLbl" />
+        <Button
+            android:id="@+id/selectContactBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="36dp"
+            android:layout_marginTop="12dp"
+            android:onClick="onClickSelectContact"
+            android:text="@string/select_contact"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/addDebtTitle" />
 
-    <TextView
-        android:id="@+id/dateLbl"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="24dp"
-        android:text="@string/date"
-        android:textSize="18sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/descriptionLbl" />
+        <TextView
+            android:id="@+id/timeLbl"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="20dp"
+            android:text="@string/time"
+            android:textSize="18sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/dateLbl" />
 
-    <TextView
-        android:id="@+id/titleLbl"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="24dp"
-        android:text="@string/title"
-        android:textSize="18sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/amountLbl" />
+        <TextView
+            android:id="@+id/dateLbl"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="24dp"
+            android:text="@string/date"
+            android:textSize="18sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/descriptionLbl" />
 
-    <TextView
-        android:id="@+id/descriptionLbl"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="20dp"
-        android:text="@string/description"
-        android:textSize="18sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/titleLbl" />
+        <TextView
+            android:id="@+id/titleLbl"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="24dp"
+            android:text="@string/title"
+            android:textSize="18sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/amountLbl" />
 
-    <TextView
-        android:id="@+id/amountLbl"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="28dp"
-        android:text="@string/amount"
-        android:textSize="18sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/numberLbl" />
+        <TextView
+            android:id="@+id/descriptionLbl"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="20dp"
+            android:text="@string/description"
+            android:textSize="18sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/titleLbl" />
 
-    <Button
-        android:id="@+id/selectDateBtn"
-        android:layout_width="114dp"
-        android:layout_height="38dp"
-        android:layout_marginEnd="8dp"
-        android:onClick="selectDate"
-        android:text="@string/select_date"
-        app:layout_constraintBaseline_toBaselineOf="@+id/dateSelectedLbl"
-        app:layout_constraintEnd_toEndOf="parent" />
+        <TextView
+            android:id="@+id/amountLbl"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="28dp"
+            android:text="@string/amount"
+            android:textSize="18sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/numberLbl" />
 
-    <EditText
-        android:id="@+id/titleEditText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="48dp"
-        android:ems="10"
-        android:hint="@string/lunch"
-        android:inputType="textPersonName"
-        app:layout_constraintBaseline_toBaselineOf="@+id/titleLbl"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.775"
-        app:layout_constraintStart_toEndOf="@+id/titleLbl" />
+        <Button
+            android:id="@+id/selectDateBtn"
+            android:layout_width="114dp"
+            android:layout_height="38dp"
+            android:layout_marginEnd="8dp"
+            android:onClick="selectDate"
+            android:text="@string/select_date"
+            app:layout_constraintBaseline_toBaselineOf="@+id/dateSelectedLbl"
+            app:layout_constraintEnd_toEndOf="parent" />
 
-    <EditText
-        android:id="@+id/descriptionEditText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        app:layout_constraintBaseline_toBaselineOf="@+id/descriptionLbl"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/descriptionLbl" />
+        <EditText
+            android:id="@+id/titleEditText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="48dp"
+            android:ems="10"
+            android:hint="@string/lunch"
+            android:inputType="textPersonName"
+            app:layout_constraintBaseline_toBaselineOf="@+id/titleLbl"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.775"
+            app:layout_constraintStart_toEndOf="@+id/titleLbl" />
 
-    <EditText
-        android:id="@+id/amountEditText"
-        android:layout_width="215dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="20dp"
-        android:ems="10"
-        android:hint="@string/dollar_amount_hint"
-        android:inputType="number"
-        app:layout_constraintBaseline_toBaselineOf="@+id/amountLbl"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/amountLbl" />
+        <EditText
+            android:id="@+id/descriptionEditText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:ems="10"
+            android:inputType="textPersonName"
+            app:layout_constraintBaseline_toBaselineOf="@+id/descriptionLbl"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/descriptionLbl" />
 
-    <TextView
-        android:id="@+id/nameLbl"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="36dp"
-        android:text="@string/name"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/selectContactBtn" />
+        <EditText
+            android:id="@+id/amountEditText"
+            android:layout_width="215dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="20dp"
+            android:ems="10"
+            android:hint="@string/dollar_amount_hint"
+            android:inputType="number"
+            app:layout_constraintBaseline_toBaselineOf="@+id/amountLbl"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/amountLbl" />
 
-    <TextView
-        android:id="@+id/numberLbl"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="36dp"
-        android:text="@string/number"
-        app:layout_constraintStart_toStartOf="@+id/nameLbl"
-        app:layout_constraintTop_toBottomOf="@+id/nameLbl" />
+        <TextView
+            android:id="@+id/nameLbl"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="36dp"
+            android:text="@string/name"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/selectContactBtn" />
 
-    <Button
-        android:id="@+id/saveBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:onClick="saveBtn"
-        android:text="@string/save"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/timeLbl" />
+        <TextView
+            android:id="@+id/numberLbl"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="36dp"
+            android:text="@string/number"
+            app:layout_constraintStart_toStartOf="@+id/nameLbl"
+            app:layout_constraintTop_toBottomOf="@+id/nameLbl" />
 
-    <EditText
-        android:id="@+id/selectedContactName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:ems="10"
-        android:hint="@string/enter_name"
-        android:inputType="textPersonName"
-        app:layout_constraintBaseline_toBaselineOf="@+id/nameLbl"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.688"
-        app:layout_constraintStart_toEndOf="@+id/nameLbl" />
+        <Button
+            android:id="@+id/saveBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:onClick="saveBtn"
+            android:text="@string/save"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/timeLbl" />
 
-    <EditText
-        android:id="@+id/selectedContactNumber"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:ems="10"
-        android:hint="@string/enter_number"
-        android:inputType="number"
-        app:layout_constraintBaseline_toBaselineOf="@+id/numberLbl"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.662"
-        app:layout_constraintStart_toEndOf="@+id/numberLbl" />
+        <EditText
+            android:id="@+id/selectedContactName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:ems="10"
+            android:hint="@string/enter_name"
+            android:inputType="textPersonName"
+            app:layout_constraintBaseline_toBaselineOf="@+id/nameLbl"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.688"
+            app:layout_constraintStart_toEndOf="@+id/nameLbl" />
 
-    <TextView
-        android:id="@+id/dateSelectedLbl"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:textSize="18sp"
-        app:layout_constraintBaseline_toBaselineOf="@+id/dateLbl"
-        app:layout_constraintEnd_toStartOf="@+id/selectDateBtn"
-        app:layout_constraintStart_toEndOf="@+id/dateLbl" />
+        <EditText
+            android:id="@+id/selectedContactNumber"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:ems="10"
+            android:hint="@string/enter_number"
+            android:inputType="number"
+            app:layout_constraintBaseline_toBaselineOf="@+id/numberLbl"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.662"
+            app:layout_constraintStart_toEndOf="@+id/numberLbl" />
 
-    <Button
-        android:id="@+id/selectTimeBtn"
-        android:layout_width="114dp"
-        android:layout_height="37dp"
-        android:layout_marginEnd="8dp"
-        android:onClick="selectTime"
-        android:text="@string/select_time"
-        app:layout_constraintBaseline_toBaselineOf="@+id/timeSelectedLbl"
-        app:layout_constraintEnd_toEndOf="parent" />
+        <TextView
+            android:id="@+id/dateSelectedLbl"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:textSize="18sp"
+            app:layout_constraintBaseline_toBaselineOf="@+id/dateLbl"
+            app:layout_constraintEnd_toStartOf="@+id/selectDateBtn"
+            app:layout_constraintStart_toEndOf="@+id/dateLbl" />
 
-    <TextView
-        android:id="@+id/timeSelectedLbl"
-        android:layout_width="100dp"
-        android:layout_height="23dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:textSize="18sp"
-        app:layout_constraintBaseline_toBaselineOf="@+id/timeLbl"
-        app:layout_constraintEnd_toStartOf="@+id/selectTimeBtn"
-        app:layout_constraintStart_toEndOf="@+id/timeLbl" />
+        <Button
+            android:id="@+id/selectTimeBtn"
+            android:layout_width="114dp"
+            android:layout_height="37dp"
+            android:layout_marginEnd="8dp"
+            android:onClick="selectTime"
+            android:text="@string/select_time"
+            app:layout_constraintBaseline_toBaselineOf="@+id/timeSelectedLbl"
+            app:layout_constraintEnd_toEndOf="parent" />
 
-    <Switch
-        android:id="@+id/whoOwesSwitch"
-        android:layout_width="43dp"
-        android:layout_height="20dp"
-        android:layout_marginEnd="80dp"
-        android:checked="false"
-        app:layout_constraintBaseline_toBaselineOf="@+id/selectContactBtn"
-        app:layout_constraintEnd_toStartOf="@+id/selectContactBtn" />
+        <TextView
+            android:id="@+id/timeSelectedLbl"
+            android:layout_width="100dp"
+            android:layout_height="23dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:textSize="18sp"
+            app:layout_constraintBaseline_toBaselineOf="@+id/timeLbl"
+            app:layout_constraintEnd_toStartOf="@+id/selectTimeBtn"
+            app:layout_constraintStart_toEndOf="@+id/timeLbl" />
 
-    <TextView
-        android:id="@+id/whoOwesLbl"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:text="@string/they_owe"
-        app:layout_constraintBaseline_toBaselineOf="@+id/whoOwesSwitch"
-        app:layout_constraintEnd_toStartOf="@+id/whoOwesSwitch"
-        app:layout_constraintStart_toStartOf="parent" />
+        <Switch
+            android:id="@+id/whoOwesSwitch"
+            android:layout_width="43dp"
+            android:layout_height="20dp"
+            android:layout_marginEnd="80dp"
+            android:checked="false"
+            app:layout_constraintBaseline_toBaselineOf="@+id/selectContactBtn"
+            app:layout_constraintEnd_toStartOf="@+id/selectContactBtn" />
 
-</android.support.constraint.ConstraintLayout>
+        <TextView
+            android:id="@+id/whoOwesLbl"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="@string/they_owe"
+            app:layout_constraintBaseline_toBaselineOf="@+id/whoOwesSwitch"
+            app:layout_constraintEnd_toStartOf="@+id/whoOwesSwitch"
+            app:layout_constraintStart_toStartOf="parent" />
+
+
+    </android.support.constraint.ConstraintLayout>
+</ScrollView>

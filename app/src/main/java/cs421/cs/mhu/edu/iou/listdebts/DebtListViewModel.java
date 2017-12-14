@@ -3,6 +3,7 @@ package cs421.cs.mhu.edu.iou.listdebts;
 import android.app.Application;
 import android.arch.lifecycle.AndroidViewModel;
 import android.arch.lifecycle.LiveData;
+import android.util.Log;
 
 import java.util.List;
 
@@ -23,7 +24,8 @@ public class DebtListViewModel extends AndroidViewModel {
     */
 
 
-    private final LiveData<List<Debt>> debtList;
+    private final LiveData<List<Debt>> theirDebtList;
+    private final LiveData<List<Debt>> myDebtList;
 
     private IOUDb database;
 
@@ -32,11 +34,16 @@ public class DebtListViewModel extends AndroidViewModel {
 
         database = IOUDb.getDatabase(application);
 
-        debtList = database.iouDao().getAllDebts();
+        theirDebtList = database.iouDao().getAllTheirDebts();
+        myDebtList = database.iouDao().getAllMyDebts();
     }
 
-    LiveData<List<Debt>> getDebtList() {
-        return debtList;
+    LiveData<List<Debt>> getMyDebtList() {
+        return myDebtList;
+    }
+
+    LiveData<List<Debt>> getTheirDebtList() {
+        return theirDebtList;
     }
 
     void deleteDebt(Debt d) {
@@ -44,6 +51,7 @@ public class DebtListViewModel extends AndroidViewModel {
     }
 
     void addDebt(Debt d) {
+        Log.d("IOU", d.toString());
         new AddDebtTask(database).execute(d);
     }
 }

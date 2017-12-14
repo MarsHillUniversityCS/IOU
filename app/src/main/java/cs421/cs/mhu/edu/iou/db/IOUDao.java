@@ -20,6 +20,12 @@ public interface IOUDao {
     @Query("SELECT * FROM Debt ORDER BY time")
     LiveData<List<Debt>> getAllDebts();
 
+    @Query("SELECT * FROM Debt WHERE theyOweMe!=0 ORDER BY time")
+    LiveData<List<Debt>> getAllTheirDebts();
+
+    @Query("SELECT * FROM Debt WHERE theyOweMe=0 ORDER BY time")
+    LiveData<List<Debt>> getAllMyDebts();
+
     @Insert (onConflict = REPLACE)
     void addDebt(Debt debt);
 

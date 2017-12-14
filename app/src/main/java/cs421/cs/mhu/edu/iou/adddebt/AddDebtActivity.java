@@ -316,7 +316,7 @@ public class AddDebtActivity extends AppCompatActivity {
 
         // querying contact data store
         Cursor cursor = getContentResolver().query(uriContact, null, null, null, null);
-
+        if (cursor == null) return;
         if (cursor.moveToFirst()) {
 
             // DISPLAY_NAME = The display name for the contact.
